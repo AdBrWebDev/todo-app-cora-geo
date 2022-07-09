@@ -19,19 +19,23 @@ export class Form extends React.Component {
     render() {
     return(
         <div>
-        <h3>TODO</h3>
+        <h3 className="title is-2 my-3">TODO</h3>
         <form onSubmit={this.handleSubmit}>
+          <div>
           <label htmlFor="new-todo">
             What needs to be done?
           </label>
-          <input
+          </div>
+          <input className="input is-rounded w-25 my-2"
             id="new-todo"
             onChange={this.handleChange}
             value={this.state.text}
           />
-          <button>
+          <div>
+          <button className="button is-primary mt-2 mb-5">
             Add
           </button>
+          </div>
         </form>
       </div>
     )}

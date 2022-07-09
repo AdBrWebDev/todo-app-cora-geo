@@ -17,9 +17,7 @@ export class FilterItems extends React.Component {
 
     render() {
         return(
-            <div>
-                <label htmlFor="cars">Filtrovať</label>
-
+            <div className="select is-primary w-25">
 <select name="filter" onChange={this.changeSelected} id="filter">
   <option value="all">všetky</option>
   <option value="active">aktivne</option>

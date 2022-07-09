@@ -2,8 +2,8 @@ import React from 'react';
 import TodoList from './components/TodoList';
 import { Form } from './components/Form';
 import { FilterItems } from './components/FilterItems';
-import "bootstrap/dist/css/bootstrap.css"
 import "bulma/css/bulma.min.css"
+import "bootstrap/dist/css/bootstrap.css"
 import "./index.css"
 
 class TodoApp extends React.Component {
@@ -20,6 +20,7 @@ class TodoApp extends React.Component {
   render() {
     return (
       <>
+      <div className="container text-center card my-5 w-75 shadow">
         <Form
           handleSubmit={this.handleSubmit}
         />
@@ -29,6 +30,7 @@ class TodoApp extends React.Component {
           onClick={this.handleDelete}
           softDelete={this.softDelete}
         />
+      </div>
       </>
     );
   }
