@@ -2,6 +2,8 @@ import React from 'react';
 import TodoList from './components/TodoList';
 import { Form } from './components/Form';
 import { FilterItems } from './components/FilterItems';
+import "bootstrap/dist/css/bootstrap.css"
+import "bulma/css/bulma.min.css"
 import "./index.css"
 
 class TodoApp extends React.Component {
@@ -9,8 +11,6 @@ class TodoApp extends React.Component {
     super(props);
     this.state = {
       items: [],
-      filterItems: [],
-      filter: 'all'
     };
   }
 
@@ -33,35 +33,35 @@ class TodoApp extends React.Component {
     );
   }
 
-  softDelete = (i) => {
-    console.log(i.id)
-    this.setState({
-      items: this.state.items.map(item => {
-        if(item.id !== i.id) return item;
-        return {
-          id: item.id,
-          text: item.text,
-          checked: !item.checked
-        }
-      })
-  })
-  console.log(this.state.items)
-  }
-
   filterItems = (filter) => {
     let items = this.state.items;
+    console.log(items)
     console.log(filter)
     switch (filter) {
       case 'all':
-        return items;
-      case 'active':
-        return items.filter(item => !item.checked);
-      case 'completed':
-        return items.filter(item => item.checked);
-      default:
-        return items;
-    }
-  }
+        return console.log(items);
+        case 'active':
+          return console.log(items.filter(item => !item.checked));
+          case 'completed':
+            return console.log(items.filter(item => item.checked));
+            default:
+              return console.log(items);
+            }
+          }
+
+          softDelete = (i) => {
+            console.log(i.id)
+            this.setState({
+                items: this.state.items.map(item => {
+                    if(item.id !== i.id) return item;
+                    return {
+                        id: item.id,
+                        text: item.text,
+                        checked: !item.checked,
+                    }
+                })
+            })
+        }
 
   handleSubmit = (text) => {
 

@@ -8,10 +8,6 @@ export class Form extends React.Component {
         }
     }
 
-    sendData = () => {
-        this.props.parentCallBack(this.state.text) 
-    }
-
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.handleSubmit(this.state.text)
@@ -19,6 +15,7 @@ export class Form extends React.Component {
     }
 
     handleChange = (e) => { this.setState({text: e.target.value}) }
+
     render() {
     return(
         <div>
