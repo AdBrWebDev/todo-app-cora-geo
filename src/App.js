@@ -5,6 +5,7 @@ import { FilterItems } from './components/FilterItems';
 import "bulma/css/bulma.min.css"
 import "bootstrap/dist/css/bootstrap.css"
 import "./index.css"
+import "material-icons/iconfont/material-icons.css"
 
 class TodoApp extends React.Component {
   constructor(props) {
@@ -19,8 +20,7 @@ class TodoApp extends React.Component {
 
   render() {
     return (
-      <>
-      <div className="container text-center card my-5 w-75 shadow">
+        <div className="container text-center card my-5 w-75 shadow mb-4">
         <Form
           handleSubmit={this.handleSubmit}
         />
@@ -30,8 +30,7 @@ class TodoApp extends React.Component {
           onClick={this.handleDelete}
           softDelete={this.softDelete}
         />
-      </div>
-      </>
+        </div>
     );
   }
 
@@ -41,13 +40,13 @@ class TodoApp extends React.Component {
     console.log(filter)
     switch (filter) {
       case 'all':
-        return console.log(items);
+        return this.setState({ items: items});
         case 'active':
-          return console.log(items.filter(item => !item.checked));
+          return this.setState({ items: items.filter(item => item.done)});
           case 'completed':
-            return console.log(items.filter(item => item.checked));
+            return this.setState({ items: items.filter(item => !item.done)});
             default:
-              return console.log(items);
+              return this.setState({ items: items});
             }
           }
 
@@ -59,7 +58,7 @@ class TodoApp extends React.Component {
                     return {
                         id: item.id,
                         text: item.text,
-                        checked: !item.checked,
+                        done: !item.checked,
                     }
                 })
             })

@@ -10,20 +10,17 @@ export class FilterItems extends React.Component {
 
     changeSelected = async (e) => {
         this.setState({selected: e.target.value}); 
-        //console.log(e.target.value)
-        const filter = await this.props.filterItems(this.state.selected);
+        const filter = await this.props.filterItems(e.target.value);
         return filter;
         }
 
     render() {
         return(
-            <div className="select is-primary w-25">
-<select name="filter" onChange={this.changeSelected} id="filter">
-  <option value="all">všetky</option>
-  <option value="active">aktivne</option>
-  <option value="done">Ukončené</option>
-</select>
-            </div>
+            <select className="form-select w-25 mx-auto" value={this.state.selected} name="filter" onChange={this.changeSelected} id="filter">
+                <option value="all">všetky</option>
+                <option value="active">aktivne</option>
+                <option value="done">Ukončené</option>
+            </select>
         )
     }
 }

@@ -32,7 +32,7 @@ export class Form extends React.Component {
             value={this.state.text}
           />
           <div>
-          <button className="button is-primary mt-2 mb-5">
+          <button className="button is-primary my-2">
             Add
           </button>
           </div>
