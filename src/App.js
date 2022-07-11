@@ -12,6 +12,7 @@ class TodoApp extends React.Component {
     super(props);
     this.state = {
       items: [],
+      copyItems: []
     };
   }
 
@@ -27,6 +28,7 @@ class TodoApp extends React.Component {
         <FilterItems filterItems={this.filterItems} />
         <TodoList
           items={this.state.items}
+          copyItems={this.state.copyItems}
           onClick={this.handleDelete}
           softDelete={this.softDelete}
         />
@@ -36,22 +38,22 @@ class TodoApp extends React.Component {
 
   filterItems = (filter) => {
     let items = this.state.items;
-    console.log(items)
-    console.log(filter)
+    /*console.log(items)
+    console.log(filter)*/
     switch (filter) {
       case 'all':
-        return this.setState({ items: items});
+        return this.setState({ copyItems: items});
         case 'active':
-          return this.setState({ items: items.filter(item => item.done)});
+          return this.setState({ copyItems: items.filter(item => !item.done)});
           case 'completed':
-            return this.setState({ items: items.filter(item => !item.done)});
+            return this.setState({ copyItems: items.filter(item => item.done)});
             default:
-              return this.setState({ items: items});
+              return this.setState({ copyItems: items});
             }
           }
 
           softDelete = (i) => {
-            console.log(i.id)
+            //console.log(i.id)
             this.setState({
                 items: this.state.items.map(item => {
                     if(item.id !== i.id) return item;
