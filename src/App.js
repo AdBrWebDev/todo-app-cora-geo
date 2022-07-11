@@ -52,7 +52,7 @@ class TodoApp extends React.Component {
             }
           }
 
-          softDelete = (i) => {
+          /*softDelete = (i) => {
             //console.log(i.id)
             this.setState({
                 items: this.state.items.map(item => {
@@ -64,9 +64,9 @@ class TodoApp extends React.Component {
                     }
                 })
             })
-        }
+        }*/
 
-  handleSubmit = (text) => {
+  /*handleSubmit = (text) => {
 
     if (!text.length) {
       return;
@@ -87,9 +87,9 @@ class TodoApp extends React.Component {
         text: '',
       };
     });
-  }
+  }*/
 
-  handleDelete = (item) => {
+  /*handleDelete = (item) => {
     this.setState(state => {
       // 3. Zapracuj zmazanie polozky item z pola items.
       let items = state.items;
@@ -99,7 +99,7 @@ class TodoApp extends React.Component {
         items
       }
     });
-  }
+  }*/
 }
 
 export default TodoApp;
