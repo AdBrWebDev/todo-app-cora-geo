@@ -4,8 +4,10 @@ import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 //import login from '../store/redux/actions';
+//import { useNavigation } from 'react-router-dom'
+import { useNavigate  } from 'react-router-dom'
 
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,6 +24,9 @@ export default class LoginForm extends React.Component {
         localStorage.setItem('username', this.state.username);
         localStorage.setItem('password', this.state.password);
         console.log("logged in")
+        this.props.navigation('/todo')
+
+        //this.props.history.push('/');
 
         /*e.preventDefault();
         const userData = {
@@ -58,19 +63,30 @@ export default class LoginForm extends React.Component {
     setPassword = (e) => this.setState({ password: e.target.value })
 
     render() {
-    return(
-        <Card className="w-50 container p-5 text-center shadow-lg">
-            <Typography id="modal-modal-title" variant="h3" component="h2">Prihlasovací formulár</Typography>
-            <div>
-            <Typography id="modal-modal-title" variant="h5" component="h2">Meno</Typography>
-                <input type="text" className="input is-rounded my-2" value={this.state.name} onChange={this.setName} />
-            </div>
-            <div>
-            <Typography id="modal-modal-title" variant="h5" component="h2">Heslo</Typography>
-                <input type="password" className="input is-rounded my-2" value={this.state.password} onChange={this.setPassword} />
-            </div>
-            <Button onClick={this.login} variant="contained" color="info">Log in</Button>
-        </Card>
-    )
+        return (
+            <Card className="w-50 container p-5 text-center shadow-lg">
+                <Typography id="modal-modal-title" variant="h3" component="h2">Prihlasovací formulár</Typography>
+                <div>
+                    <Typography id="modal-modal-title" variant="h5" component="h2">Meno</Typography>
+                    <input type="text" className="input is-rounded my-2" value={this.state.name} onChange={this.setName} />
+                </div>
+                <div>
+                    <Typography id="modal-modal-title" variant="h5" component="h2">Heslo</Typography>
+                    <input type="password" className="input is-rounded my-2" value={this.state.password} onChange={this.setPassword} />
+                </div>
+                <Button onClick={this.login} variant="contained" color="info">Log in</Button>
+            </Card>
+        )
     }
 }
+
+export default function RootFunction(props) {
+    const navigation = useNavigate() // extract navigation prop here 
+
+    return <LoginForm navigation={navigation} {...props}/> //pass to your component.
+
+}
+
+
+
+//export default withRouter(LoginForm);
