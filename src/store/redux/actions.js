@@ -1,30 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit';
 import Axios from 'axios'
 
-/*const getData = () => {
-    Axios.get('http://localhost:5000/getTodos').then((response) => {
-        console.log(response.data); 
-    })
-}*/
-
 export const TodoListActions = createSlice({
     name: "todoList",
     initialState: {
-        items: [], /*Axios.get('http://localhost:5000/getTodos').then((response) => {
-            console.log(response.data); 
-            return response.data;
-        })*/
+        items: [], 
     },
 
     reducers: {
-
-        getData: () => {
-            Axios.get('http://localhost:5000/getTodos').then((response) => {
-                console.log(response.data); 
-                this.state.items = response.data;
-            })
-            console.log(this.state.items)
-        },
 
         handleSubmit: (state,action) => {
             Axios.post('http://localhost:5000/sendTodo', {text: action.payload}).then((response) => {
@@ -32,7 +15,17 @@ export const TodoListActions = createSlice({
                 })
         },
 
+        editData: (state, action) => {
+
+        },
+
         softDelete: (state, action) => {
+            Axios.post('http://localhost:5000/updateTodo', {text: action.payload, status: 1, date: new Date()}).then((response) => {
+                console.log(response.data)
+              })
+        },
+
+        hadleUpdate: (state, action) => {
             Axios.post('http://localhost:5000/updateTodo', {text: action.payload, status: 1, date: new Date()}).then((response) => {
                 console.log(response.data)
               })
@@ -46,6 +39,6 @@ export const TodoListActions = createSlice({
     }}
 );
 
-export const {handleSubmit, handleDelete ,softDelete, getData} = TodoListActions.actions;
+export const {handleSubmit, handleDelete, softDelete, handleUpdate, editData} = TodoListActions.actions;
 
 export default TodoListActions.reducer;

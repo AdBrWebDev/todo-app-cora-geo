@@ -5,6 +5,7 @@ import { FilterItems } from './components/FilterItems';
 //import {getData} from './store/redux/actions';
 import "bulma/css/bulma.min.css"
 import "bootstrap/dist/css/bootstrap.css"
+import "bootstrap/dist/js/bootstrap.js"
 import "./index.css"
 import "material-icons/iconfont/material-icons.css"
 //import Axios from 'axios'

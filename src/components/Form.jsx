@@ -19,7 +19,7 @@ export function Form() {
             What needs to be done?
           </label>
           </div>
-          <input className="input is-rounded w-25 my-2"
+          <input className="input is-rounded w-25 my-2 text-center"
             id="new-todo"
             onChange={(e) => setValue(e.target.value)}
             value={value}
