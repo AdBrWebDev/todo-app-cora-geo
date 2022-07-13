@@ -2,13 +2,13 @@ import React from 'react';
 import {Form} from './Form';
 import {FilterItems} from './FilterItems';
 import TodoList from './TodoList';
-
 export default class MainPartApp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
           items: [],
         };
+        this.logout = this.logout.bind(this);
       }
     
       // 1. Prepis handleChange ako arrow function.
@@ -17,7 +17,11 @@ export default class MainPartApp extends React.Component {
 
     render() {
         return (
-            <div className="container text-center card my-5 w-75 shadow mb-4">
+          <>
+          <button className="button is-primary" onClick={this.logout}>
+            <i className="material-icons">logout</i>
+          </button>
+          <div className="container text-center card my-5 w-75 shadow mb-4">
         <Form
           handleSubmit={this.handleSubmit}
         />
@@ -29,6 +33,7 @@ export default class MainPartApp extends React.Component {
           softDelete={this.softDelete}
         />
         </div>
+        </>
         );
     }
 }

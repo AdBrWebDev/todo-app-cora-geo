@@ -25,19 +25,6 @@ class TodoApp extends React.Component {
         <Route path="/" exact element={<LoginForm />} />
         <Route path="/todo"  element={<MainPartApp />} />
       </Routes>
-        {/*<div className="container text-center card my-5 w-75 shadow mb-4">
-        <Form
-          handleSubmit={this.handleSubmit}
-        />
-        <FilterItems filterItems={this.filterItems} />
-        <TodoList
-          items={this.state.items}
-          copyItems={this.state.copyItems}
-          onClick={this.handleDelete}
-          softDelete={this.softDelete}
-        />
-        <LoginForm />
-    </div>*/}
     </>
     );
   }

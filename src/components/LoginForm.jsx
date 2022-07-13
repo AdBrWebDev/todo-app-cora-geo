@@ -20,11 +20,15 @@ class LoginForm extends React.Component {
         this.setPassword = this.setPassword.bind(this);
     }
 
-    login = async (e) => {
+    login = async () => {
+        if(this.state.username !== '' && this.state.password !== '') {
         localStorage.setItem('username', this.state.username);
         localStorage.setItem('password', this.state.password);
         console.log("logged in")
         this.props.navigation('/todo')
+        }else{
+            alert("nevyplnené meno alebo heslo")
+        }
 
         //this.props.history.push('/');
 
@@ -86,7 +90,3 @@ export default function RootFunction(props) {
     return <LoginForm navigation={navigation} {...props}/> //pass to your component.
 
 }
-
-
-
-//export default withRouter(LoginForm);
