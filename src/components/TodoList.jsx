@@ -1,7 +1,7 @@
 // 4. Vytvor samostatny modul pre komponent TodoList a nasledne ho importuj v App.js.
 import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {softDelete, handleDelete, handleUpdate, editData} from '../store/redux/actions';
+import {useDispatch} from 'react-redux';
+import {handleDelete, editData} from '../store/redux/actions';
 import axios from 'axios'
 import Modal from '@mui/material/Modal';
 import Card from '@mui/material/Card';
@@ -15,6 +15,7 @@ export default function TodoList(props){
   const [data, setData] = useState([])
   const [open, isOpen] = useState(false)
   const [status, changeStatus] = useState(0)
+  const [nValue, setNValue] = useState('')
   console.log(data)
   //const items = useSelector(state => state.todoList.items);
   const dispatch = useDispatch();
@@ -39,12 +40,12 @@ export default function TodoList(props){
     <>
         <ul className="mt-5 w-75 mx-auto">
           {data.map(item => (
-              <li key={item.id} className="notification is-info is-light shadow">
+              <li key={item.id} className={`notification is-light is-${(item.status === 0) ? "info" : (item.status === 1) ? "success" : "danger" } shadow`}>
                 <div className="row">
-                <p className="col-6 col-sm-6 col-md-6 col-8 col-lg-8 text-center">{item.text}</p>
+                <p className="col-6 col-sm-6 col-md-6 col-8 col-lg-8 text-center my-auto">{item.text}</p>
             <div className="col-6 col-sm-6 col-md-6 col-xl4 col-lg-4 d-flex text-center">
             <Button variant="contained" color="info" className='mr-3' onClick={() => isOpen(true)}><i className="material-icons">edit</i></Button>
-            <Button variant="contained" color="info" className='mr-3' onClick={(e) => {dispatch(handleDelete(item.id)); e.preventDefault()}}><i className="material-icons">delete</i></Button>
+            <Button variant="contained" color="error" className='mr-3' onClick={(e) => {dispatch(handleDelete(item.id)); e.preventDefault()}}><i className="material-icons">delete</i></Button>
             </div>
             <Modal
             open={open}
@@ -57,7 +58,7 @@ export default function TodoList(props){
       {item.text}
     </Typography>
     <div>
-    <input type="text" placeholder="Zmeniť text..." className="input is-rounded mb-3 w-75 mx-auto text-center" />
+    <input type="text" value={nValue} onChange={(e) => setNValue(e.target.value)} placeholder="Zmeniť text..." className="input is-rounded mb-3 w-75 mx-auto text-center" />
     </div>
     <div>
     <InputLabel id="demo-simple-select-label">Zmeniť status</InputLabel>
@@ -74,7 +75,10 @@ export default function TodoList(props){
     <MenuItem value={2}>Ukončené</MenuItem>
   </Select>
   </div>
-    <Button variant="outlined" className="mt-3" title="zmeniť data" color="error" onClick={() => dispatch(editData())}><i className="material-icons">edit</i></Button>
+    <Button variant="outlined" className="mt-3" title="zmeniť data" color="error" onClick={() => {
+      dispatch(editData({ id: item.id, text: (nValue === '') ? item.text : nValue, status: status})); 
+      console.log(item.id, (nValue === null) ? item.text : nValue , status)
+      }}><i className="material-icons">edit</i></Button>
   </Card>
 </Modal>
             </div>

@@ -9,13 +9,12 @@ import "bootstrap/dist/js/bootstrap.js"
 import "./index.css"
 import "material-icons/iconfont/material-icons.css"
 //import Axios from 'axios'
-
+import LoginForm from './components/LoginForm';
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       items: [],
-      copyItems: []
     };
   }
 
@@ -35,23 +34,10 @@ class TodoApp extends React.Component {
           onClick={this.handleDelete}
           softDelete={this.softDelete}
         />
+        <LoginForm />
         </div>
     );
   }
-
-  filterItems = (filter) => {
-    let items = this.state.items;
-    switch (filter) {
-      case 'all':
-        return this.setState({ copyItems: items});
-        case 'active':
-          return this.setState({ copyItems: items.filter(item => !item.done)});
-          case 'completed':
-            return this.setState({ copyItems: items.filter(item => item.done)});
-            default:
-              return this.setState({ copyItems: items});
-            }
-          }
 }
 
 export default TodoApp;

@@ -16,19 +16,9 @@ export const TodoListActions = createSlice({
         },
 
         editData: (state, action) => {
-
-        },
-
-        softDelete: (state, action) => {
-            Axios.post('http://localhost:5000/updateTodo', {text: action.payload, status: 1, date: new Date()}).then((response) => {
-                console.log(response.data)
-              })
-        },
-
-        hadleUpdate: (state, action) => {
-            Axios.post('http://localhost:5000/updateTodo', {text: action.payload, status: 1, date: new Date()}).then((response) => {
-                console.log(response.data)
-              })
+            Axios.post('http://localhost:5000/editTodo', {text: action.payload.text, id: action.payload.id, status: action.payload.status}).then((response) => {
+                  console.log(response.data)
+            })
         },
 
         handleDelete: (state, action) => {
@@ -39,6 +29,6 @@ export const TodoListActions = createSlice({
     }}
 );
 
-export const {handleSubmit, handleDelete, softDelete, handleUpdate, editData} = TodoListActions.actions;
+export const {handleSubmit, handleDelete, editData} = TodoListActions.actions;
 
 export default TodoListActions.reducer;
