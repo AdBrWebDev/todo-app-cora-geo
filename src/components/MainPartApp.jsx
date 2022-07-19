@@ -8,7 +8,7 @@ export default class MainPartApp extends React.Component {
         this.state = {
           items: [],
         };
-        this.logout = this.logout.bind(this);
+        //this.logout = this.logout.bind(this);
       }
     
       // 1. Prepis handleChange ako arrow function.

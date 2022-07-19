@@ -36,6 +36,12 @@ app.post('/login', function(req, res){
     )
 })
 
+app.post('/register', (req, res) => {
+    dbcon.query('INSERT INTO users (id, name,password,token) VALUES (?,?,?,?)', ['', req.body.username, req.body.password, ''], (err, result) => {
+        res.send(result)
+    })
+})
+
 app.post('/sendTodo', (req, res) => {
     dbcon.query('INSERT INTO todos (id, text,status,date) VALUES (?,?,?,?)', ['', req.body.text, 0, new Date()], (err, result) => {
         res.send(result)

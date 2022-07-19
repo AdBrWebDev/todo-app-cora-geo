@@ -7,6 +7,8 @@ import "material-icons/iconfont/material-icons.css"
 import LoginForm from './components/LoginForm';
 import MainPartApp from './components/MainPartApp';
 import {Routes, Route} from 'react-router-dom'
+import RegistrationForm from './components/RegistrationForm';
+
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
@@ -22,8 +24,9 @@ class TodoApp extends React.Component {
     return (
       <>
       <Routes>
-        <Route path="/" exact element={<LoginForm />} />
+        <Route path="/login" element={<LoginForm />} />
         <Route path="/todo"  element={<MainPartApp />} />
+        <Route path="/" exact element={<RegistrationForm />} />
       </Routes>
     </>
     );
