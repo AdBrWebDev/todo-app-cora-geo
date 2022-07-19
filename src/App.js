@@ -24,9 +24,9 @@ class TodoApp extends React.Component {
     return (
       <>
       <Routes>
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/todo"  element={<MainPartApp />} />
-        <Route path="/" exact element={<RegistrationForm />} />
+        <Route path="/" element={<LoginForm />} />
+        <Route path="/todo" exact element={<MainPartApp />} />
+        <Route path="/registration" element={<RegistrationForm />} />
       </Routes>
     </>
     );

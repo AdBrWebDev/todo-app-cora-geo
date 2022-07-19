@@ -3,7 +3,16 @@ const cors = require('cors');
 const app = express();
 const port = 5000;
 const mysql = require('mysql');
-require('dotenv').config();
+//require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
+const rounds = 10;
+const jwt = require('jsonwebtoken')
+const crypto = require('crypto');
+const bcrypt = require('bcrypt');
+
+const myKey = crypto.randomBytes(64).toString('hex');
+
 
 const dbcon = mysql.createPool({
     host: 'localhost',
@@ -23,22 +32,42 @@ app.use(cors({
 
 app.post('/login', function(req, res){
     const {username, password} = req.body;
-    console.log(req.body.username)
-    dbcon.query(`SELECT * FROM users WHERE name = ? AND password = ?`, [username, password], (err, result) => {
-        if(err) throw err;
-        if(result.length > 0){
-            res.send(result)
-            console.log(result.json())
-        }else{
-            res.send('Nesprávne meno alebo e-mail')
+
+    dbcon.query("SELECT * FROM users WHERE name = ?", [username], (err, result) => {
+        if(err){
+            res.send({err: err})
         }
-    }
-    )
+        if(result.length > 0){
+            console.log(result)
+            const valid = bcrypt.compare(password, result[0].password)
+                if(valid){
+                    res.send(result)
+                    console.log("successfully logged in")
+                }else{
+                    console.log("wrong password")
+                    res.send({message: "Nesprávny e-mail alebo heslo!"})
+                }
+        }else{
+            res.send({message: "Užívatel neexistuje!"})
+        }
+    });
 })
 
 app.post('/register', (req, res) => {
-    dbcon.query('INSERT INTO users (id, name,password,token) VALUES (?,?,?,?)', ['', req.body.username, req.body.password, ''], (err, result) => {
-        res.send(result)
+    bcrypt.hash(req.body.password, rounds, (err, hash) => {
+        if(err){
+            console.log(err)
+        }
+        dbcon.query("SELECT * FROM users WHERE name = ?", [req.body.username], (err, result) => {
+            console.log(result)
+            if(result.length > 0){
+                res.send({message: "Užívateľ už existuje!"})
+            }else if(result.length === 0){
+                dbcon.query("INSERT INTO users (id, name, password) VALUES(?,?,?)", 
+            ['', req.body.username, hash]);
+            res.send({message: "Registrácia bola úspešná"})
+            }
+        })
     })
 })
 

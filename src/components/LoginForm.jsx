@@ -1,11 +1,11 @@
 import React from 'react';
-//import {useSelector, useDispatch} from 'react-redux';
+//import {useSelector} from 'react-redux';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-//import login from '../store/redux/actions';
-//import { useNavigation } from 'react-router-dom'
 import { useNavigate  } from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import Axios from 'axios';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -20,7 +20,7 @@ class LoginForm extends React.Component {
         this.setPassword = this.setPassword.bind(this);
     }
 
-    login = async () => {
+    /*login = async () => {
         if(this.state.username !== '' && this.state.password !== '') {
         localStorage.setItem('username', this.state.username);
         localStorage.setItem('password', this.state.password);
@@ -29,7 +29,23 @@ class LoginForm extends React.Component {
         }else{
             alert("nevyplnené meno alebo heslo")
         }
-    }
+    }*/
+
+    login = async () => {
+        Axios.post('http://localhost:5000/login', {username: this.state.username, password: this.state.password}).then(res => {
+            console.log(res.status)
+            if(res.status === 200) {
+                localStorage.setItem('username', this.state.username);
+                localStorage.setItem('password', this.state.password);
+                localStorage.setItem('userId', res.data[0].id);
+                console.log("logged in")
+                this.props.navigation('/todo')
+            }
+            else{
+                alert("nevyplnené meno alebo heslo")
+            }
+        })
+    } 
 
     setName = (e) => this.setState({ username: e.target.value })
 
@@ -46,6 +62,9 @@ class LoginForm extends React.Component {
                 <div>
                     <Typography id="modal-modal-title" variant="h5" component="h2">Heslo</Typography>
                     <input type="password" className="input is-rounded my-2" value={this.state.password} onChange={this.setPassword} />
+                </div>
+                <div>
+                <Link to="/registration">Vytvoriť nového používateľa</Link>
                 </div>
                 <Button onClick={this.login} variant="contained" color="info">Log in</Button>
             </Card>

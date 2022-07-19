@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import Axios from 'axios';
+import {Link} from 'react-router-dom'
 
 export default class Registration extends React.Component {
     constructor(props) {
@@ -31,6 +32,7 @@ export default class Registration extends React.Component {
             else{
                 alert("registrácia zlyhala")
             }
+            this.setState({username: '', password: ''})
         }
             )
 
@@ -50,6 +52,9 @@ export default class Registration extends React.Component {
                 <div>
                     <Typography id="modal-modal-title" variant="h5" component="h2">Heslo</Typography>
                     <input type="password" className="input is-rounded my-2" value={this.state.password} onChange={this.setPassword} />
+                </div>
+                <div>
+                <Link to="/">Spať na prihlásenie</Link>
                 </div>
                 <Button onClick={this.register} variant="contained" color="info">Register</Button>
             </Card>
