@@ -11,15 +11,16 @@ export const TodoListActions = createSlice({
     reducers: {
 
         handleSubmit: (state,action) => {
-            Axios.post(`${state.server}/sendTodo`, {text: action.payload}).then((response) => {
+            Axios.post(`${state.server}/sendTodo`, {text: action.payload/*, userId: localStorage.getItem('userId'), name: localStorage.getItem('username')*/}).then((response) => {
                   console.log(response.data)
                   if(response.status === 200){
-                    Axios.get(`${state.server}/getTodos`).then((response) => {
+                    console.log("ok")
+                    /*Axios.get(`${state.server}/getTodos`).then((response) => {
                         //this.state.push(...state.items, response.data)
                         //state.items = response.data
                         console.log(response.data)
                         console.log(response.status)
-                    })
+                    })*/
                   }
                   else{
                     console.log("Error")

@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken')
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 
-const myKey = crypto.randomBytes(64).toString('hex');
+//const myKey = crypto.randomBytes(64).toString('hex');
 
 
 const dbcon = mysql.createPool({
@@ -72,7 +72,20 @@ app.post('/register', (req, res) => {
 })
 
 app.post('/sendTodo', (req, res) => {
-    dbcon.query('INSERT INTO todos (id, text,status,date) VALUES (?,?,?,?)', ['', req.body.text, 0, new Date()], (err, result) => {
+    const {userId, name} = req.body;
+
+    const user = {
+        name: name,
+        userId: userId
+    }
+
+    const token = jwt.sign({user}, "secretkey", (err, token) => {
+        res.json({token})
+    });
+
+    console.log(token)
+
+    dbcon.query('INSERT INTO todos (id, text,status,date, token) VALUES (?,?,?,?, ?)', ['', req.body.text, 0, new Date(), token], (err, result) => {
         res.send(result)
     })
 })

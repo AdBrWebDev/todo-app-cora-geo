@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useHistory } from 'react-router-dom';
 
 class Nav extends React.Component {
     constructor(props) {
@@ -8,8 +8,10 @@ class Nav extends React.Component {
     }
 
     logout = () => {
+        let history = useHistory()
         localStorage.clear();
         this.props.navigation('/');
+        history.push('/');
     }
 
     render() {

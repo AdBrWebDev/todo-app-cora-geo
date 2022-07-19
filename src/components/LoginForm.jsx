@@ -36,7 +36,6 @@ class LoginForm extends React.Component {
             console.log(res.status)
             if(res.status === 200) {
                 localStorage.setItem('username', this.state.username);
-                localStorage.setItem('password', this.state.password);
                 localStorage.setItem('userId', res.data[0].id);
                 console.log("logged in")
                 this.props.navigation('/todo')
